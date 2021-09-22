@@ -6,15 +6,13 @@
                 <h1>
                     welcome to
                     <i class="fas fa-book">
-                        : :before
                     </i>
                     <strong>Bookers</strong>
                     !!
                 </h1>
                 <p>
                     In
-                    <i class="fas fa--book">
-                        : :before
+                    <i class="fas fa-book">
                     </i>
                     <strong>Bookers</strong>
                     ,
@@ -24,11 +22,12 @@
                 </p>
                 <p> about various books!</p>
                 <div class="btn-wrapper col-10 mx-auto">
+                    
                     <div class="row">
-                        <%= f.submit "login", class:"btn btn-info btn-sm btn-block mb-3 sign_in", value:"Log in" %>
+                        <%= link_to "Log in", new_user_session_path, class: "btn btn-info btn-block btn-sm mb-3" %>
                     </div>
                     <div class="row">
-                        <%= f.submit "signup", class="btn btn-success btn-sm btn-block sign_up", value:"Sign Up" 
+                        <%= link_to "Sign up", new_user_registration_path, class: "btn btn-success btn-sm btn-block" %> 
                     </div>
                 </div>
             </div>
