@@ -37,11 +37,14 @@
                <%= link_to book_path(@book) do %>
                <%= @book.title %>
                <% end %>
-
              </td>
              <td>
                <%= @book.body %>
              </td>
+             <td id="favorite_buttons_<%= @book.id %>">
+               <%= render "favorites/favorite", book: @book %>
+             </td>
+             <td>コメント件数:<%= @book.book_comments.count %></td>
              <% if user_signed_in? && current_user.id == @book.user_id %>
              <td>
                <%= link_to "Edit", edit_book_path(@book), class: "btn btn-success" %>
@@ -50,34 +53,11 @@
                <%= link_to "Destroy", book_path(@book), class: "btn btn-sm btn-danger", method: :delete, data: { confirm: 'delete ok?' } %>
              </td>
              <% end %>
-             <td id="favorite_buttons_<%= @book.id %>">
-               <%= render "favorites/favorite", book: @book %>
-             </td>
-            </tr>
-            <tr>
-              <td>コメント件数:<%= @book.book_comments.count %></td>
-              <% @book.book_comments.each do |book_comment| %>
-              <td><%= image_tag('no_image.jpg') %></td>
-              <td>
-              <%= book_comment.user.name %>
-              <%= book_comment.created_at.strftime('%Y/%m/%d') %><%= book_comment.comment %>
-              </td>
-              <% if book_comment.user == current_user %>
-              <td>
-                <%= link_to "削除", book_book_comment_path(book_comment.book, book_comment), method: :delete %>
-              </td>
-              <% end %>
-              <% end %>
-
-              <td>
-                <%= form_with(model:[@book, @book_comment], local: true) do |f| %>
-                <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
-                <%= f.submit "送信する" %>
-                <% end %>
-              </td>
             </tr>
         </tbody>
       </table>
+      <%= render  "book_comments/index", book_comment: @book_comments, book: @book %>
+      <%= render "book_comments/form", book_comment: @book_comment, book: @book %>
     </div>
     </div>
   </div>
