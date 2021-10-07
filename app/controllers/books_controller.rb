@@ -6,6 +6,7 @@ class BooksController < ApplicationController
     @books = Book.all
     @book_new = Book.new
     @user = current_user
+    @books = Book.includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size}
 
   end
 
