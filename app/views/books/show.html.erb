@@ -45,6 +45,7 @@
                <%= render "favorites/favorite", book: @book %>
              </td>
              <td>コメント件数:<%= @book.book_comments.count %></td>
+             <td>閲覧数：<%= @book.impressions_count %></td>
              <% if user_signed_in? && current_user.id == @book.user_id %>
              <td>
                <%= link_to "Edit", edit_book_path(@book), class: "btn btn-success" %>

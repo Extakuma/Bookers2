@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'chat/:id', to: 'chats#show', as: 'chat'
+  get 'chat/:id' => 'chats#show', as: 'chat'
   resources :chats, only: [:create]
   get 'search/search'
   devise_for :users

@@ -4,6 +4,7 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all
+    @rank_books = Book.order(impressions_count: 'DESC')
     @book_new = Book.new
     @user = current_user
     @books = Book.includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size}
@@ -26,6 +27,7 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+    impressionist(@book, nil, unique: [:ip_address])
     @book_comment = BookComment.new
     @book_comments = @book.book_comments.order(created_at: :desc)
     @books = Book.all
